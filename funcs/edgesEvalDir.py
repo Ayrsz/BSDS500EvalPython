@@ -1,9 +1,11 @@
 import os
+from pdi.mat2png import mat2png
+from pdi.nmsMex import edgesNmsMex
+
 
 #%   .pDistr     - [{'type','parfor'}] parameters for fevalDistr #?
 
-def edgesEvalDir(resDir : os.path, gtDir : os.path, pDistr, thresholds : int, tolerance : float, thin : bool) -> (float, float, float): #ODS, OIS, AP
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", os.getcwd())
+def edgesEvalDir(resDir : os.path, gtDir : os.path, nmsDir: os.path, pDistr, thresholds : int, tolerance : float, thin : bool, nms : bool) -> (float, float, float): #ODS, OIS, AP
 
     assert os.path.exists(gtDir), f"Directory {gtDir} do not exists " 
     assert os.path.exists(resDir), f"Directory {resDir} do not exists "
@@ -13,21 +15,31 @@ def edgesEvalDir(resDir : os.path, gtDir : os.path, pDistr, thresholds : int, to
     filesGT = sorted(filesGT)
     filesPRED = os.listdir(resDir)
     filesPRED = sorted(filesGT)
+    assert len(filesGT) == len(filesPRED), f"Amount of files is diferent beetwen pred and gt {len(filesPRED)} | {len(filesGT)}"
     
     #Results var
     metrics = None
-
     #len of images
     n = len(filesGT)
+    
 
 
+    #Apply NMS
+    for i in range(n):
+        name = filesPRED[i].split(".")[0]
+
+
+
+    #Apply thinning
+
+    #Run evaluation
     for i in range(n):
         #Name of the file
-        name = filesGT[i].sep(".")[0]
+        name = filesGT[i].split(".")[0]
         
-        #garant gt as a .mat file
-        assert filesGT[i].sep(".")[1] == ".mat", f"A non matlab {filesGT[i]} file"
-        assert filesPRED.find(name + ".png"), f"Cannot find {filesGT[i]} in png format "
+        print(f"{filesGT[i].split(".")[1]}")
+        assert filesGT[i].split(".")[1] == "mat", f"A non matlab {filesGT[i]} file"
+        assert (name + ".png") in filesPRED, f"Cannot find {filesGT[i]} in png format "
 
 
 

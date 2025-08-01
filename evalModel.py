@@ -5,12 +5,15 @@ import cv2 as cv
 import os
 import scipy as sci
 
-dirGT = os.path.abspath("./sources/GT/test/")
+gtDir = os.path.abspath("./sources/GT/test/")
 dirPREDS = os.path.abspath("./sources/PREDS/MATLAB/")
+targetPNGPREDS = os.path.abspath("./sources/PREDS/PNG/")
 targetNMS = os.path.abspath("./sources/NMS/")
 targetDOC = ""
 
 apply_thin = True
 apply_nms = True
 
-ODS, OIS, AP = edgesEvalDir(dirPREDS, dirGT, "", 10, 0.0075, True)
+
+
+ODS, OIS, AP = edgesEvalDir(dirPREDS, gtDir=gtDir, nmsDir = targetNMS, pDistr ="", thresholds=10, tolerance = 0.0075, thin = True, nms = True)
