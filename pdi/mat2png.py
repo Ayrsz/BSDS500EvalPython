@@ -6,7 +6,7 @@ import os
 def mat2png(dirMatlabPred, dirPNGPRED):
 
     if os.listdir(dirMatlabPred) <= os.listdir(dirPNGPRED):
-        print("| !!DirMatlab and DirPNG of the same size, will not convert matlab to png!! |")
+        print("| DirMatlab and DirPNG of the same size, will not convert matlab to png |")
         return 
 
     print("| Converting MATLAB preds to PNG |")
@@ -17,8 +17,7 @@ def mat2png(dirMatlabPred, dirPNGPRED):
         assert file.split(".")[1] == "mat", f"Pred with no matlab file {file}"
         fileMat = os.path.join(dirMatlabPred, file)
         im = sci.io.loadmat(fileMat)
-        im = im["image_data"] # Could be changed, depende on how the images was saved
+        im = im["image_data"].astype(np.uint8) # Could be changed, depende on how the images was saved
 
         newFile = os.path.join(dirPNGPRED, name + ".png")
-        print(newFile)
         cv.imwrite(newFile, im)

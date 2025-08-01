@@ -1,11 +1,7 @@
 import os
-from pdi.mat2png import mat2png
-from pdi.nmsMex import edgesNmsMex
-
-
 #%   .pDistr     - [{'type','parfor'}] parameters for fevalDistr #?
 
-def edgesEvalDir(resDir : os.path, gtDir : os.path, nmsDir: os.path, pDistr, thresholds : int, tolerance : float, thin : bool, nms : bool) -> (float, float, float): #ODS, OIS, AP
+def edgesEvalDir(resDir : os.path, gtDir : os.path, pDistr, thresholds : int, tolerance : float, thin : bool) -> (float, float, float): #ODS, OIS, AP
 
     assert os.path.exists(gtDir), f"Directory {gtDir} do not exists " 
     assert os.path.exists(resDir), f"Directory {resDir} do not exists "
@@ -22,15 +18,6 @@ def edgesEvalDir(resDir : os.path, gtDir : os.path, nmsDir: os.path, pDistr, thr
     #len of images
     n = len(filesGT)
     
-
-
-    #Apply NMS
-    for i in range(n):
-        name = filesPRED[i].split(".")[0]
-        
-
-
-
     #Apply thinning
 
     #Run evaluation

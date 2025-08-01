@@ -6,14 +6,12 @@ import scipy as sci
 import cv2 as cv
 
 gtDir = os.path.abspath("./sources/GT/test/")
-dirPREDS = os.path.abspath("./sources/PREDS/MATLAB/")
-targetPNGPREDS = os.path.abspath("./sources/PREDS/PNG/")
-targetNMS = os.path.abspath("./sources/NMS/")
-targetDOC = ""
+targetDir = os.path.abspath("./sources/PREDS/PNG/")
+
 
 apply_thin = True
 apply_nms = True
 
 
 
-ODS, OIS, AP = edgesEvalDir(dirPREDS, gtDir=gtDir, nmsDir = targetNMS, pDistr ="", thresholds=10, tolerance = 0.0075, thin = True, nms = True)
+ODS, OIS, AP = edgesEvalDir(resDir = targetDir, gtDir=gtDir, pDistr ="", thresholds=10, tolerance = 0.0075, thin = True)

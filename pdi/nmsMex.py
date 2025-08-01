@@ -1,6 +1,8 @@
 import cv2 as cv
 import scipy as sci
 import numpy as np
+import os
+import time
 
 def nms(image):
     #Convolucoes
@@ -87,6 +89,27 @@ def edgesNmsMex(original_map, orientations, radius_supres, multiplier):
 
     nms_result = supressNoisy(nms_result, radius_supres)
     return nms_result
+
+def nmsDir(predPNGDir, targetDir):
+    if os.listdir(predPNGDir) <= os.listdir(targetDir):
+        print("| DirPNGPreds and DirTargetNms of the same size, will not apply nms |")
+        return 
+
+    print("| Applying NMS |")
+    start = time.time()  
+    filesPRED = os.listdir(predPNGDir)
+
+    for file in filesPRED:
+        name = file.split(".")[0]
+        
+        filePRED = os.path.join(predPNGDir, file)
+        im = cv.imread(filePRED, 0).astype(np.float32)
+        nmsResult = nms(im).astype(np.uint8)
+
+
+        newFile = os.path.join(targetDir, file) # dir + name.png
+        cv.imwrite(newFile, nmsResult)
+    print(f"| NMS APPLIED in {(time.time() - start)/60:.2f} minutes")
 
 if __name__ == "__main__":
     print("a")
