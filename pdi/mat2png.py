@@ -15,9 +15,10 @@ def mat2png(dirMatlabPred, dirPNGPRED):
     for file in filesMAT:
         name = file.split(".")[0]
         assert file.split(".")[1] == "mat", f"Pred with no matlab file {file}"
-        
-        im = sci.io.loadmat(file)
+        fileMat = os.path.join(dirMatlabPred, file)
+        im = sci.io.loadmat(fileMat)
+        im = im["image_data"] # Could be changed, depende on how the images was saved
 
-        newFile = dirPNGPRED + name + ".png"
-        
+        newFile = os.path.join(dirPNGPRED, name + ".png")
+        print(newFile)
         cv.imwrite(newFile, im)

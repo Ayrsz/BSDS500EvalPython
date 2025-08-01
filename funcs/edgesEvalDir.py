@@ -27,6 +27,7 @@ def edgesEvalDir(resDir : os.path, gtDir : os.path, nmsDir: os.path, pDistr, thr
     #Apply NMS
     for i in range(n):
         name = filesPRED[i].split(".")[0]
+        
 
 
 
@@ -36,8 +37,6 @@ def edgesEvalDir(resDir : os.path, gtDir : os.path, nmsDir: os.path, pDistr, thr
     for i in range(n):
         #Name of the file
         name = filesGT[i].split(".")[0]
-        
-        print(f"{filesGT[i].split(".")[1]}")
         assert filesGT[i].split(".")[1] == "mat", f"A non matlab {filesGT[i]} file"
         assert (name + ".png") in filesPRED, f"Cannot find {filesGT[i]} in png format "
 

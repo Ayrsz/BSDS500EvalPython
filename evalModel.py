@@ -1,9 +1,9 @@
 from pdi.nmsMex import *
 from funcs.readPreds import *
 from funcs.edgesEvalDir import *
-import cv2 as cv
 import os
 import scipy as sci
+import cv2 as cv
 
 gtDir = os.path.abspath("./sources/GT/test/")
 dirPREDS = os.path.abspath("./sources/PREDS/MATLAB/")
